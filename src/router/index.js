@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import AuthRoutes from "../views/Auth/routes";
+import CategoryRoutes from "../views/Category/route"
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,10 @@ const router = new VueRouter({
     {
       path: "/auth",
       ...AuthRoutes,
+    },
+    {
+      path: "/categories",
+      ...CategoryRoutes,
     }
   ]
 });

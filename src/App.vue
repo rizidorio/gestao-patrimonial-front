@@ -7,8 +7,29 @@
 </template>
 
 <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  button {
+    padding: 1.4rem !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+  }
+
+  a {
+    color: #000 !important;
+  }
+
+  a:hover {
+    font-size: 1rem;
+    color: #E76F51 !important;
+    transition: 300ms;
+  }
+
   .back {
-    background-color: #efe2be;
+    background-color: #F8F8F1;
   }
 </style>
 

@@ -1,13 +1,13 @@
 <template>
-  <v-container class="background">
+  <v-container class="back">
     <router-view />
   </v-container>
 </template>
 
 <style scoped>
-.background {
+.back {
   max-width: none;
-  background: #efe2be;
+  background: #264653;
   height: 100vh;
 }
 </style>
