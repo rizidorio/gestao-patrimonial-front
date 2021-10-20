@@ -37,7 +37,7 @@ export default {
                         this.$store.commit("USER_LOGGED", user);
                         this.$store.commit("TOKEN_EXPIRES", tokenExpires);
                         this.$store.commit("CURRENT_USER_TOKEN", userToken);
-                        this.$router.push("/categories");
+                        this.$router.push("/configurations");
                     })
                     .catch((err) => {
                         console.log(err.response)

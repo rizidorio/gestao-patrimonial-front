@@ -43,6 +43,7 @@
                                 dark
                                 color="#2A9D8F"
                                 @click="login"
+                                :loading="loading"
                             >
                                 Entrar
                             </v-btn>
