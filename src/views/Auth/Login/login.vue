@@ -44,6 +44,7 @@
                                 color="#2A9D8F"
                                 @click="login"
                                 :loading="loading"
+                                large
                             >
                                 Entrar
                             </v-btn>

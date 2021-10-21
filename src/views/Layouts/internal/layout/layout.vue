@@ -1,5 +1,5 @@
 <template>
-<v-container class="fill-height">
+<v-container class="fill-height align-start">
     <Menu />
     <router-view></router-view>
 </v-container>

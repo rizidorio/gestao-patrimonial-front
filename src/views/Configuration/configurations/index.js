@@ -1,6 +1,12 @@
 import Api from "../../../services/apiService/apiService";
+import CategoriesTable from "../../Category/categoriesTable/categoriesTable.vue"
+
 
 export default {
+    components: {
+        CategoriesTable,
+    },
+    
     created() {
         
     },

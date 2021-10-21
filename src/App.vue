@@ -12,12 +12,6 @@
     padding: 0;
   }
 
-  button {
-    padding: 1.4rem !important;
-    font-size: 1rem !important;
-    font-weight: 700 !important;
-  }
-
   a {
     color: #000 !important;
   }
@@ -31,6 +25,20 @@
   .back {
     background-color: #F8F8F1;
   }
+
+  .item {
+  background: #e7eaeb !important;
+}
+
+.item span {
+  font-size: 0.9rem;
+  color: #4c4d4a;
+}
+
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
+  font-size: 1rem !important;
+}
+
 </style>
 
 <style scoped>

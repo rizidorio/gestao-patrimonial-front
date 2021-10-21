@@ -48,6 +48,7 @@ export default {
                             this.error = false;
                         }, 4000);
                     });
+                this.loading = false;
             }
         },
     },
