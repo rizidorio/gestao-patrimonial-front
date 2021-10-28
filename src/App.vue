@@ -7,27 +7,27 @@
 </template>
 
 <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-  }
+html, body {
+  margin: 0;
+  padding: 0;
+}
 
-  a {
-    color: #000 !important;
-  }
+a {
+  color: #000 !important;
+}
 
-  a:hover {
-    font-size: 1rem;
-    color: #E76F51 !important;
-    transition: 300ms;
-  }
+a:hover {
+  font-size: 1rem;
+  color: #E76F51 !important;
+  transition: 300ms;
+}
 
-  .back {
-    background-color: #F8F8F1;
-  }
+.back {
+  background-color: #F8F8F1;
+}
 
-  .item {
-  background: #e7eaeb !important;
+.item {
+background: #e7eaeb !important;
 }
 
 .item span {

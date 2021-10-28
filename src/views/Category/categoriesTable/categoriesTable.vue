@@ -9,6 +9,7 @@
             <v-btn
                 class="white--text text-button"
                 color="#077173"
+                @click="newCategory"
             >
                 Adicionar
             </v-btn>
@@ -26,6 +27,7 @@
                 <v-text-field
                     label="Categoria"
                     color="#0A9396"
+                    v-model="name"
                 >
                 </v-text-field>
             </v-col>
@@ -34,17 +36,19 @@
                 <v-btn
                     class="white--text text-button"
                     color="#EE9B00"
+                    @click="filterTable"
                 >
                     Filtrar
                 </v-btn>
                 <v-btn
                     color="#BB3E03"
                     class="white--text ml-4 text-button"
+                    @click="resetFilter"
                 >
                     Limpar
                 </v-btn>
             </v-col>
-        </v-row>
+        </v-row>      
         <v-row>
             <v-col cols="12">
                 <v-data-table
@@ -127,11 +131,17 @@
             >
             </v-pagination>
         </v-row>
+
+        <v-dialog v-model="createDialog" max-width="600">
+            <ManageCategory title="Nova categoria" @close="closeModal" :key="dialogKey" />
+        </v-dialog>
     </v-main>
 </template>
 
 <style scoped>
-
+.text-button {
+    letter-spacing: initial !important;
+}
 </style>
 
 <script src="./index.js"></script>
