@@ -36,7 +36,8 @@ background: #e7eaeb !important;
 }
 
 .v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
-  font-size: 1rem !important;
+  font-size: 0.9rem !important;
+  height: 40px !important;
 }
 
 </style>

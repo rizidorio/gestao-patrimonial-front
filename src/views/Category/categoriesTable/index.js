@@ -13,8 +13,11 @@ export default {
     data: () => ({
         apiService: Api,
         loading: false,
+        deleteLoading: false,
         filterVisible: false,
         createDialog: false,
+        editDialog: false,
+        deleteDialog: false,
         dialogKey: false,
         page: 1,
         totalPages: 1,
@@ -50,6 +53,7 @@ export default {
     methods: {
         closeModal() {
             this.createDialog = false;
+            this.editDialog = false;
             this.getCategories();
         },
 
@@ -60,10 +64,13 @@ export default {
 
         editCategory(category) {
             this.currentCategory = category;
+            this.editDialog = true;
+            this.dialogKey = !this.dialogKey;
         },
 
         deleteCategory(category) {
             this.currentCategory = category;
+            this.deleteDialog = true;
         },
 
         filterTable() {
@@ -90,7 +97,6 @@ export default {
 
             await this.apiService.post("category/getAll", this.filter)
                 .then((response) => {
-                    console.log(response.data.content)
                     this.totalPages = response.data.content.totalPages;
                     this.categories = response.data.content.objects;
                 }).catch((err) => {
@@ -98,6 +104,38 @@ export default {
                 });
 
             this.loading = false;
+        },
+
+        async removeCategory() {
+            this.deleteLoading = true;
+
+            const categoryId = this.currentCategory.id;
+
+            console.log(categoryId)
+
+            await this.apiService.delete(`category/delete/${categoryId}`)
+                .then(() => {
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
+            
+            this.deleteLoading = false;
+            this.deleteDialog = false;
+            this.getCategories();
+        }
+    },
+
+    watch: {
+        pageSize() {
+            this.filter.pageSize = this.pageSize;
+            this.filter.page = 1;
+            this.getCategories();
+        },
+
+        page() {
+            this.filter.page = this.page;
+            this.getCategories();
         }
     },
 };

@@ -9,7 +9,7 @@ export default {
     created() {
         if (this.category) {
             this.currentCategory = this.category;
-            this.isEditing;
+            this.isEditing = true;
         }
     },
 
@@ -41,7 +41,7 @@ export default {
         buttonText() {
             switch (this.step) {
                 case 0:
-                    return this.isEditing ? "Atualalizar" : "Cadastrar";
+                    return this.isEditing ? "Atualizar" : "Cadastrar";
                 default:
                     return "Fechar";
             }
@@ -82,15 +82,27 @@ export default {
 
             const url = this.isEditing ? "category/update" : "category/create";
 
-            await this.apiService.post(url, category)
-                .then((response) => {
-                    console.log(response.data)
-                    this.step++;
-                    this.successMessage = response.data.message;
-                })
-                .catch((err) => {
-                    console.log(err)
-                });
+            if (this.isEditing) {
+                await this.apiService.put(url, category)
+                    .then((response) => {
+                        console.log(response.data)
+                        this.step++;
+                        this.successMessage = response.data.message;
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    });
+            } else {
+                await this.apiService.post(url, category)
+                    .then((response) => {
+                        console.log(response.data)
+                        this.step++;
+                        this.successMessage = response.data.message;
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    });
+            }
             
             this.loading = false;
             this.changeData = false;

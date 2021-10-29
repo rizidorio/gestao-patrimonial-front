@@ -6,15 +6,12 @@
             <v-btn
                 color="#AE2012" 
                 icon
-                @click="closeModal"
+                @click="close"
             >
                 <v-icon small color="#AE2012"> mdi-close </v-icon>
             </v-btn>
         </v-toolbar>
-        <v-dialog
-            v-model="alterDialog"
-            max-width="300"
-        >
+        <v-dialog v-model="alterDialog" max-width="300">
             <v-sheet
                 class="px-7 pt-7 pb-4 mx-auto text-center d-inline-block"
                 color="blue-grey darken-3"
@@ -81,6 +78,7 @@
 <style scoped>
 .v-btn {
     letter-spacing: initial !important;
+    font-size: 0.8rem !important;
 }
 </style>
 

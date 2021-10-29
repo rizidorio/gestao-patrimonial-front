@@ -1,5 +1,5 @@
 <template>
-    <v-main>
+    <v-main class="pa-0">
         <v-toolbar flat>
             <v-toolbar-title>
                 <v-icon color="black" large class="mr-5">mdi-view-list</v-icon>
@@ -49,7 +49,7 @@
                 </v-btn>
             </v-col>
         </v-row>      
-        <v-row>
+        <v-row class="my-0 py-0">
             <v-col cols="12">
                 <v-data-table
                     :loading="loading"
@@ -98,7 +98,7 @@
                 </v-data-table>
             </v-col>
         </v-row>
-        <v-row class="my-5 text-center d-flex" justify="center" align="center">
+        <v-row class="my-0 text-center d-flex" justify="center" align="center">
             <v-menu bottom offset-y>
                 <template v-slot:activator="{ on, attrs}">
                     <v-btn
@@ -109,7 +109,7 @@
                         class="white--text"
                     >
                         Qtde: {{ pageSize }}
-                        <v-icon>mdi-chevron-down</v-icon>
+                        <v-icon class="ml-1">mdi-chevron-down</v-icon>
                     </v-btn>
                 </template>
                 <v-list>
@@ -134,6 +134,30 @@
 
         <v-dialog v-model="createDialog" max-width="600">
             <ManageCategory title="Nova categoria" @close="closeModal" :key="dialogKey" />
+        </v-dialog>
+
+        <v-dialog v-model="editDialog" max-width="600">
+            <ManageCategory title="Editar categoria" :category="currentCategory" @close="closeModal" :key="dialogKey" />
+        </v-dialog>
+
+         <v-dialog v-model="deleteDialog" max-width="300">
+            <v-sheet
+                class="px-7 pt-7 pb-4 mx-auto text-center d-inline-block"
+                color="blue-grey darken-3"
+                dark
+            >
+                <div class="grey--text text--lighten-1 text-body-2 mb-4">
+                    Tem certeza em remover esta categoria?
+                </div>
+
+                <v-btn class="ma-1" color="grey" text @click="deleteDialog = false">
+                    Não
+                </v-btn>
+
+                <v-btn class="ma-1" color="#9B2226" text @click="removeCategory" :loading="deleteLoading">
+                    Sim
+                </v-btn>
+            </v-sheet>
         </v-dialog>
     </v-main>
 </template>
