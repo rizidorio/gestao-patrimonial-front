@@ -1,5 +1,4 @@
 import ConfigurationPage from "./configurations/configuration.vue";
-//import Menu from "../Layouts/internal/menu/menu.vue";
 import Layout from "../Layouts/internal/layout/layout.vue";
 
 const ConfigurationRoutes = {

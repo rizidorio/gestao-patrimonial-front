@@ -13,10 +13,10 @@
             class="ma-5"
         >
             <v-tabs-slider color="#000"></v-tabs-slider>
-            <v-tab href="#tabCategoria">
+            <v-tab class="mr-5" href="#tabCategory">
                 Categorias
             </v-tab>
-            <v-tab href="#tabTeste">
+            <v-tab class="mr-5" href="#tabSubcategory">
                 Subcategorias
             </v-tab>
             <v-tab href="#tabTeste">
@@ -26,9 +26,14 @@
     <v-tabs-items
         v-model="tab"
     >
-        <v-tab-item value="tabCategoria">
+        <v-tab-item value="tabCategory">
             <v-container>
                 <CategoriesTable />
+            </v-container>
+        </v-tab-item>
+        <v-tab-item value="tabSubcategory">
+            <v-container>
+                <SubcategoryTable />
             </v-container>
         </v-tab-item>
     </v-tabs-items>
