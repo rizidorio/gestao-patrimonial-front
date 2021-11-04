@@ -8,10 +8,7 @@
                 Configurações
             </v-toolbar-title>
         </v-toolbar>
-        <v-tabs
-            v-model="tab"
-            class="ma-5"
-        >
+        <v-tabs v-model="tab" class="ma-5">
             <v-tabs-slider color="#000"></v-tabs-slider>
             <v-tab class="mr-5" href="#tabCategory">
                 Categorias
@@ -19,13 +16,8 @@
             <v-tab class="mr-5" href="#tabSubcategory">
                 Subcategorias
             </v-tab>
-            <v-tab href="#tabTeste">
-                Endereços
-            </v-tab>
         </v-tabs>
-    <v-tabs-items
-        v-model="tab"
-    >
+    <v-tabs-items v-model="tab">
         <v-tab-item value="tabCategory">
             <v-container>
                 <CategoriesTable />

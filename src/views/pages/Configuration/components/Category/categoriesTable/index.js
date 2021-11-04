@@ -1,21 +1,19 @@
-import Api from "../../../services/apiService/apiService";
-import ManageSubcategory from "../manageSubcategory/manageSubcategory.vue";
+import Api from "../../../../../../services/apiService/apiService";
+import ManageCategory from "../manageCategory/manageCategory.vue";
 
 export default {
     components: {
-        ManageSubcategory,
+        ManageCategory,
     },
     
     created() {
         this.getCategories();
-        this.getSubcategories();
     },
 
     data: () => ({
         apiService: Api,
         loading: false,
         deleteLoading: false,
-        categoryLoading: false,
         filterVisible: false,
         createDialog: false,
         editDialog: false,
@@ -29,25 +27,16 @@ export default {
             page: 1,
             pageSize: 10,
             name: "",
-            categoryId: 0,
         },
         name: "",
-        categoryId: 0,
         categories: [],
-        subcategories: [],
-        currentSubcategory: {},
+        currentCategory: {},
         headers: [
-            {
-                text: "Subcategoria",
-                align: "center",
-                class: "item",
-                value: "name",
-            },
             {
                 text: "Categoria",
                 align: "center",
                 class: "item",
-                value: "category",
+                value: "name",
             },
             {
                 text: "Ações",
@@ -65,22 +54,22 @@ export default {
         closeModal() {
             this.createDialog = false;
             this.editDialog = false;
-            this.getSubcategories();
+            this.getCategories();
         },
 
-        newSubcategory() {
+        newCategory() {
             this.createDialog = true;
             this.dialogKey = !this.dialogKey;
         },
 
-        editSubcategory(subcategory) {
-            this.currentSubcategory = subcategory;
+        editCategory(category) {
+            this.currentCategory = category;
             this.editDialog = true;
             this.dialogKey = !this.dialogKey;
         },
 
-        deleteSubcategory(subcategory) {
-            this.currentSubcategory = subcategory;
+        deleteCategory(category) {
+            this.currentCategory = category;
             this.deleteDialog = true;
         },
 
@@ -88,15 +77,8 @@ export default {
             this.filter.page = this.page;
             this.filter.pageSize = this.pageSize;
             this.filter.name = this.name;
-            this.filter.categoryId = this.categoryId;
 
-            this.getSubcategories();
-        },
-
-        getCategoryName(categoryId) {
-            if (this.categories) {
-                return this.categories.find(x => x.id === categoryId).name;
-            }
+            this.getCategories();
         },
 
         resetFilter() {
@@ -104,21 +86,19 @@ export default {
                 page: 1,
                 pageSize: 10,
                 name: "",
-                categoryId: 0,
             };
             this.name = "";
-            this.categoryId = 0;
 
-            this.getSubcategories();
+            this.getCategories();
         },
 
-        async getSubcategories() {
+        async getCategories() {
             this.loading = true;
 
-            await this.apiService.post("subcategory/getAll", this.filter)
+            await this.apiService.post("category/getAll", this.filter)
                 .then((response) => {
                     this.totalPages = response.data.content.totalPages;
-                    this.subcategories = response.data.content.objects;
+                    this.categories = response.data.content.objects;
                 }).catch((err) => {
                     console.log(err)
                 });
@@ -126,25 +106,12 @@ export default {
             this.loading = false;
         },
 
-        async getCategories() {
-            this.categoryLoading = true;
-
-            await this.apiService.get("category/getAll")
-                .then((response) => {
-                    this.categories = response.data.content;
-                }).catch((err) => {
-                    console.log(err)
-                });
-
-            this.categoryLoading = false;
-        },
-
-        async removeSubcategory() {
+        async removeCategory() {
             this.deleteLoading = true;
 
-            const subcategoryId = this.currentSubcategory.id;
+            const categoryId = this.currentCategory.id;
 
-            await this.apiService.delete(`subcategory/delete/${subcategoryId}`)
+            await this.apiService.delete(`category/delete/${categoryId}`)
                 .then(() => {
                 })
                 .catch((err) => {
@@ -153,7 +120,7 @@ export default {
             
             this.deleteLoading = false;
             this.deleteDialog = false;
-            this.getSubcategories();
+            this.getCategories();
         }
     },
 
@@ -161,12 +128,12 @@ export default {
         pageSize() {
             this.filter.pageSize = this.pageSize;
             this.filter.page = 1;
-            this.getSubcategories();
+            this.getCategories();
         },
 
         page() {
             this.filter.page = this.page;
-            this.getSubcategories();
+            this.getCategories();
         }
     },
 };

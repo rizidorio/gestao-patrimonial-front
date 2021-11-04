@@ -1,9 +1,7 @@
-import Api from "../../../services/apiService/apiService";
-import ManageCategory from "../manageCategory/manageCategory.vue";
+import Api from "../../../../../services/apiService/apiService";
 
 export default {
     components: {
-        ManageCategory,
     },
     
     created() {
@@ -29,14 +27,38 @@ export default {
             name: "",
         },
         name: "",
-        categories: [],
-        currentCategory: {},
+        companies: [],
+        currentCompany: {},
         headers: [
             {
-                text: "Categoria",
+                text: "Nome Fantasia",
                 align: "center",
                 class: "item",
                 value: "name",
+            },
+            {
+                text: "CNPJ/CPF",
+                align: "center",
+                class: "item",
+                value: "document",
+            },
+            {
+                text: "Responsável",
+                align: "center",
+                class: "item",
+                value: "responsible",
+            },
+            {
+                text: "Celular",
+                align: "center",
+                class: "item",
+                value: "cellPhone",
+            },
+            {
+                text: "E-mail",
+                align: "center",
+                class: "item",
+                value: "email",
             },
             {
                 text: "Ações",
@@ -54,22 +76,22 @@ export default {
         closeModal() {
             this.createDialog = false;
             this.editDialog = false;
-            this.getCategories();
+            this.getCompanies();
         },
 
-        newCategory() {
+        newCompany() {
             this.createDialog = true;
             this.dialogKey = !this.dialogKey;
         },
 
-        editCategory(category) {
-            this.currentCategory = category;
+        editCompany(company) {
+            this.currentCompany = company;
             this.editDialog = true;
             this.dialogKey = !this.dialogKey;
         },
 
-        deleteCategory(category) {
-            this.currentCategory = category;
+        deleteCompany(company) {
+            this.currentCompany = company;
             this.deleteDialog = true;
         },
 
@@ -78,7 +100,7 @@ export default {
             this.filter.pageSize = this.pageSize;
             this.filter.name = this.name;
 
-            this.getCategories();
+            this.getCompanies();
         },
 
         resetFilter() {
@@ -89,16 +111,16 @@ export default {
             };
             this.name = "";
 
-            this.getCategories();
+            this.getCompanies();
         },
 
-        async getCategories() {
+        async getCompanies() {
             this.loading = true;
 
-            await this.apiService.post("category/getAll", this.filter)
+            await this.apiService.post("company/getAll", this.filter)
                 .then((response) => {
                     this.totalPages = response.data.content.totalPages;
-                    this.categories = response.data.content.objects;
+                    this.companies = response.data.content.objects;
                 }).catch((err) => {
                     console.log(err)
                 });
@@ -106,14 +128,12 @@ export default {
             this.loading = false;
         },
 
-        async removeCategory() {
+        async removeCompany() {
             this.deleteLoading = true;
 
-            const categoryId = this.currentCategory.id;
+            const companyId = this.currentCompany.id;
 
-            console.log(categoryId)
-
-            await this.apiService.delete(`category/delete/${categoryId}`)
+            await this.apiService.delete(`company/delete/${companyId}`)
                 .then(() => {
                 })
                 .catch((err) => {
@@ -122,7 +142,7 @@ export default {
             
             this.deleteLoading = false;
             this.deleteDialog = false;
-            this.getCategories();
+            this.getCompanies();
         }
     },
 
@@ -130,12 +150,12 @@ export default {
         pageSize() {
             this.filter.pageSize = this.pageSize;
             this.filter.page = 1;
-            this.getCategories();
+            this.getCompanies();
         },
 
         page() {
             this.filter.page = this.page;
-            this.getCategories();
+            this.getCompanies();
         }
     },
 };

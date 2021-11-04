@@ -1,4 +1,4 @@
-import Api from "../../../services/apiService/apiService";
+import Api from "../../../../../../services/apiService/apiService";
 
 export default {
     props: {
