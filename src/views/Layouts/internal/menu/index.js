@@ -11,8 +11,8 @@ export default {
         items: [
             { title: 'Painel', icon: 'mdi-chart-tree' },
             { title: 'Empresas', icon: 'mdi-city', url: '/companies' },
-            { title: 'Filiais', icon: 'mdi-store-outline' },
-            { title: 'Setores', icon: 'mdi-sitemap' },
+            // { title: 'Filiais', icon: 'mdi-store-outline' },
+            // { title: 'Setores', icon: 'mdi-sitemap' },
             { title: 'Bens', icon: 'mdi-package-variant-closed' },
             { title: 'Usuários', icon: 'mdi-account-multiple-outline' },
             { title: 'Configurações', icon: 'mdi-cogs', url: '/configurations' },

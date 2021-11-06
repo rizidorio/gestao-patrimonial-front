@@ -1,6 +1,10 @@
 <template>
     <v-main class="pa-0">
         <v-toolbar flat>
+            <v-toolbar-title>
+                <v-icon color="black" large class="mr-5">mdi-home-city-outline</v-icon>
+                Matriz
+            </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn
                 class="white--text text-button"
@@ -19,15 +23,28 @@
         </v-toolbar>
         <v-divider></v-divider>
         <v-row class="pa-3 mt-5" v-show="filterVisible">
-            <v-col cols="12" sm="7" md="7" lg="7">
+            <v-col cols="12" sm="4" md="4" lg="4">
                 <v-text-field
-                    label="Categoria"
+                    label="Nome"
                     color="#0A9396"
                     v-model="name"
+                    hint="Razão Social ou Nome Fantasia"
                 >
                 </v-text-field>
             </v-col>
-            <v-col></v-col>
+            <v-col cols="12" sm="4" md="4" lg="4">
+                <v-text-field
+                    label="CNPJ / CPF"
+                    color="#0A9396"
+                    v-model="document"
+                    hint="CNPJ ou CPF"
+                    v-mask="getMask"
+                    :rules="[
+                        (value) => documentIsValid(value) || 'Documento inválido',
+                    ]"
+                >
+                </v-text-field>
+            </v-col>
             <v-col cols="12" sm="4" md="4" lg="4">
                 <v-btn
                     class="white--text text-button"
@@ -60,6 +77,18 @@
                     <template v-slot:item.name="{ item }"> 
                         {{ item.name }}
                     </template>
+                    <template v-slot:item.document="{ item }"> 
+                        {{ item.cnpjCpf }}
+                    </template>
+                    <template v-slot:item.responsible="{ item }"> 
+                        {{ item.responsibleName }}
+                    </template>
+                    <template v-slot:item.cellPhone="{ item }"> 
+                        {{ item.cellPhoneNumber }}
+                    </template>
+                    <template v-slot:item.email="{ item }"> 
+                        {{ item.email }}
+                    </template>
                     <template v-slot:item.actions="{ item }">
                         <v-tooltip bottom>
                             <template v-slot:activator="{ on, attrs }">
@@ -68,7 +97,7 @@
                                     v-on="on"
                                     v-bind="attrs"
                                     small
-                                    @click.stop="editCategory(item)"
+                                    @click.stop="editCompany(item)"
                                 >
                                     <v-icon small color="#fff">mdi-pencil</v-icon>
                                 </v-btn>
@@ -83,7 +112,7 @@
                                     v-on="on"
                                     v-bind="attrs"
                                     small
-                                    @click.stop="deleteCategory(item)"
+                                    @click.stop="deleteCompany(item)"
                                 >
                                     <v-icon small color="#fff">mdi-delete</v-icon>
                                 </v-btn>
@@ -143,14 +172,14 @@
                 dark
             >
                 <div class="grey--text text--lighten-1 text-body-2 mb-4">
-                    Tem certeza em remover esta categoria?
+                    Tem certeza em remover esta empresa?
                 </div>
 
                 <v-btn class="ma-1" color="grey" text @click="deleteDialog = false">
                     Não
                 </v-btn>
 
-                <v-btn class="ma-1" color="#9B2226" text @click="removeCategory" :loading="deleteLoading">
+                <v-btn class="ma-1" color="#9B2226" text @click="removeCompany" :loading="deleteLoading">
                     Sim
                 </v-btn>
             </v-sheet>

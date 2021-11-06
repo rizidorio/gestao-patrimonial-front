@@ -9,6 +9,7 @@ export default {
     },
 
     data: () => ({
+        tab: null,
     }),
 
     methods: {
