@@ -1,7 +1,9 @@
 import Api from "../../../../../services/apiService/apiService";
+import ManageCompany from "../manageCompany/manageCompany.vue";
 
 export default {
     components: {
+        ManageCompany,
     },
     
     created() {
@@ -33,7 +35,7 @@ export default {
         currentCompany: {},
         headers: [
             {
-                text: "Nome Fantasia",
+                text: "Empresa",
                 align: "center",
                 class: "item",
                 value: "name",

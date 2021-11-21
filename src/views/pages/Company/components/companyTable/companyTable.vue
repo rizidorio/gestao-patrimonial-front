@@ -75,7 +75,7 @@
                     hide-default-footer
                 >
                     <template v-slot:item.name="{ item }"> 
-                        {{ item.name }}
+                        {{ item.name != null ? item.name : item.corporateName }}
                     </template>
                     <template v-slot:item.document="{ item }"> 
                         {{ item.cnpjCpf }}
@@ -157,11 +157,11 @@
             </v-pagination>
         </v-row>
 
-        <!-- <v-dialog v-model="createDialog" max-width="600">
-            <ManageCategory title="Nova categoria" @close="closeModal" :key="dialogKey" />
+        <v-dialog v-model="createDialog" max-width="900">
+            <ManageCompany title="Nova empresa" @close="closeModal" :key="dialogKey" />
         </v-dialog>
 
-        <v-dialog v-model="editDialog" max-width="600">
+        <!-- <v-dialog v-model="editDialog" max-width="600">
             <ManageCategory title="Editar categoria" :category="currentCategory" @close="closeModal" :key="dialogKey" />
         </v-dialog> -->
 
