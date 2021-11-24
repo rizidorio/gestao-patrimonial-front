@@ -10,6 +10,7 @@ export default {
     created() {
         if (this.company) {
             this.currentCompany = this.company;
+            this.getAddress();
             this.isEditing = true;
         }
     },
@@ -33,8 +34,8 @@ export default {
             id: 0,
             name: "",
             corporateName: "",
-            cnpj: "",
-            ie: "",
+            cnpjCpf: "",
+            ieRg: "",
             responsibleName: "",
             phoneNumber: "",
             cellPhoneNumber: "",
@@ -83,7 +84,7 @@ export default {
                 case 1:
                     return "Endereço"
                 default:
-                    return this.isEditing ? "Atualização efetuada" : "Cadastrar efetuado";
+                    return "";
             }
         },
 
@@ -113,8 +114,10 @@ export default {
             }
         },
 
-        isValidCnpj(cnpj) {
-            return Utils.validarCNPJ(cnpj);
+        validateCnpj(cnpj) {
+            if(cnpj) {
+                return Utils.validarCNPJ(cnpj);
+            }
         },
 
         async nextStep() {
@@ -133,13 +136,19 @@ export default {
 
         async getAddress() {
             this.addressLoading = true;
-            console.log(this.postalCode)
 
-            await this.apiService.get(`address/getPostalCode/${this.postalCode}`)
-                .then((response) => {
-                    this.currentAddress = response.data.content;
-                });
-            
+            if (this.postalCode) {
+                await this.apiService.get(`address/getPostalCode/${this.postalCode}`)
+                    .then((response) => {
+                        this.currentAddress = response.data.content;
+                    });
+            } else {
+                await this.apiService.get(`address/${this.currentCompany.addressId}`)
+                    .then((response) => {
+                        this.currentAddress = response.data.content
+                        this.postalCode = this.currentAddress.postalCode
+                    })
+            }
             this.addressLoading = false;
         },
 
@@ -151,8 +160,8 @@ export default {
                 Name: this.currentCompany.name,
                 CorporateName: this.currentCompany.corporateName,
                 CompanyType: this.companyType,
-                CnpjCpf: this.currentCompany.cnpj,
-                IeRg: this.currentCompany.ie,
+                CnpjCpf: this.currentCompany.cnpjCpf,
+                IeRg: this.currentCompany.ieRg,
                 ResponsibleName: this.currentCompany.responsibleName,
                 PhoneNumber: this.currentCompany.phoneNumber,
                 CellPhoneNumber: this.currentCompany.cellPhoneNumber,

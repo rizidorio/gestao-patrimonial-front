@@ -89,6 +89,7 @@ export default {
         },
 
         editCompany(company) {
+            console.log(company)
             this.currentCompany = company;
             this.editDialog = true;
             this.dialogKey = !this.dialogKey;

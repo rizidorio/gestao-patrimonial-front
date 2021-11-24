@@ -40,7 +40,7 @@
                     hint="CNPJ ou CPF"
                     v-mask="getMask"
                     :rules="[
-                        (value) => documentIsValid(value) || 'Documento inválido',
+                        (value) => value == '' || documentIsValid(value) || 'Documento inválido',
                     ]"
                 >
                 </v-text-field>
@@ -161,9 +161,9 @@
             <ManageCompany title="Nova empresa" @close="closeModal" :key="dialogKey" />
         </v-dialog>
 
-        <!-- <v-dialog v-model="editDialog" max-width="600">
-            <ManageCategory title="Editar categoria" :category="currentCategory" @close="closeModal" :key="dialogKey" />
-        </v-dialog> -->
+        <v-dialog v-model="editDialog" max-width="900">
+            <ManageCompany title="Editar empresa" :company="currentCompany" @close="closeModal" :key="dialogKey" />
+        </v-dialog>
 
          <v-dialog v-model="deleteDialog" max-width="300">
             <v-sheet

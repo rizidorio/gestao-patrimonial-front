@@ -11,8 +11,9 @@
                 <v-icon small color="#AE2012"> mdi-close </v-icon>
             </v-btn>
         </v-toolbar>
-        <v-toolbar flat>
-            <v-toolbar-title class="text-subtitle-1">
+        <v-divider></v-divider>
+        <v-toolbar flat v-if="step < 2">
+            <v-toolbar-title  class="text-subtitle-1">
                 {{ caption }}
             </v-toolbar-title>
             <v-spacer></v-spacer>
@@ -67,18 +68,18 @@
                             <v-text-field
                                 label="CNPJ"
                                 color="#0A9396"
-                                v-model="currentCompany.cnpj"
+                                v-model="currentCompany.cnpjCpf"
                                 v-mask="['##.###.###/####-##']"
                                 :rules="[
                                     (value) => !!value || 'Cnpj é obrigatório',
-                                    (value) => isValidCnpj(value) || 'Cnpj inválido'
+                                    (value) => validateCnpj(value) || 'Cnpj inválido'
                                 ]"
                             >
                             </v-text-field>
                          </v-col>
                          <v-col cols="12" sm="6" md="6" lg="6">
                             <v-text-field
-                                v-model="currentCompany.ie"
+                                v-model="currentCompany.ieRg"
                                 color="#0A9396"
                                 label="Inscrição Estadual"
                             ></v-text-field>
@@ -199,7 +200,7 @@
             </v-window-item>
 
             <v-window-item :value="2">
-                <div class="fill-heigth text-center pa-8">
+                <div class="fill-heigth text-center py-8">
                     <v-icon large color="success">mdi-checkbox-marked-circle</v-icon>
                     <span class="ml-5 text-subtitle-1">
                         {{ successMessage }}
