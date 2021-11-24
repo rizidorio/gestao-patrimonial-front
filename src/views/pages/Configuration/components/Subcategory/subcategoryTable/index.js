@@ -1,4 +1,4 @@
-import Api from "../../../services/apiService/apiService";
+import Api from "../../../../../../services/apiService/apiService";
 import ManageSubcategory from "../manageSubcategory/manageSubcategory.vue";
 
 export default {

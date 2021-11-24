@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import AuthRoutes from "../views/Auth/router";
-import ConfigurationRoutes from "../views/Configuration/router";
+import AuthRoutes from "../views/pages/Auth/router";
+import ConfigurationRoutes from "../views/pages/Configuration/router";
+import CompanyRoutes from "../views/pages/Company/router";
 
 Vue.use(VueRouter);
 
@@ -20,6 +21,10 @@ const router = new VueRouter({
     {
       path: "/configurations",
       ...ConfigurationRoutes,
+    },
+    {
+      path: "/companies",
+      ...CompanyRoutes,
     }
   ]
 });

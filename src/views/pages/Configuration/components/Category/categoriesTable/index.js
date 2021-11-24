@@ -1,4 +1,4 @@
-import Api from "../../../services/apiService/apiService";
+import Api from "../../../../../../services/apiService/apiService";
 import ManageCategory from "../manageCategory/manageCategory.vue";
 
 export default {
@@ -110,8 +110,6 @@ export default {
             this.deleteLoading = true;
 
             const categoryId = this.currentCategory.id;
-
-            console.log(categoryId)
 
             await this.apiService.delete(`category/delete/${categoryId}`)
                 .then(() => {

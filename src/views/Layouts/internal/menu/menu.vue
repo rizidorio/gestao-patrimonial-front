@@ -26,6 +26,7 @@
                         <v-list-item
                         v-for="item in items"
                         :key="item.title"
+                        :href="item.url"
                         link
                         width="100%"
                         >
@@ -42,7 +43,7 @@
 
                 <template v-slot:append>
                     <div class="pa-2">
-                        <v-btn block color="#005566">
+                        <v-btn block color="#005566" @click="logout">
                             Sair
                             <v-icon class="ml-3">mdi-logout-variant</v-icon>
                         </v-btn>
